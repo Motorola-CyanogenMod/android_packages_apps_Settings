@@ -332,14 +332,15 @@ public class Settings extends PreferenceActivity
             });
         }
 
-        // Override up navigation for multi-pane, since we handle it in the fragment breadcrumbs
-        if (onIsMultiPane()) {
-            getActionBar().setDisplayHomeAsUpEnabled(false);
-            getActionBar().setHomeButtonEnabled(false);
-        }
-
         mActionBar = getActionBar();
-        mActionBar.setDisplayShowCustomEnabled(true);
+        if (mActionBar != null) {
+            // Override up navigation for multi-pane, since we handle it in the fragment breadcrumbs
+            if (onIsMultiPane()) {
+                mActionBar.setDisplayHomeAsUpEnabled(false);
+                mActionBar.setHomeButtonEnabled(false);
+            }
+            mActionBar.setDisplayShowCustomEnabled(true);
+        }
     }
 
     @Override
@@ -486,7 +487,8 @@ public class Settings extends PreferenceActivity
         com.android.settings.cyanogenmod.PrivacySettings.class.getName(),
         com.android.settings.quicksettings.QuickSettingsTiles.class.getName(),
         com.android.settings.cyanogenmod.QuietHours.class.getName(),
-        ThemeSettings.class.getName()
+        ThemeSettings.class.getName(),
+        com.android.settings.wifi.WifiApSettings.class.getName()
     };
 
     @Override
@@ -1378,4 +1380,5 @@ public class Settings extends PreferenceActivity
     public static class QuickSettingsConfigActivity extends Settings { /* empty */ }
     public static class QuietHoursSettingsActivity extends Settings { /* empty */ }
     public static class ThemeSettingsActivity extends Settings { /* empty */ }
+    public static class WifiApSettingsActivity extends Settings { /* empty */ }
 }
